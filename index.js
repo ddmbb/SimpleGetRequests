@@ -1,11 +1,21 @@
 "use strict";
 
-const numDogs = $("#dogs").val();
-
 function getDogImage() {
-  fetch("https://dog.ceo/api/breeds/image/random/numDogs")
+  let numDogs = $("#dogs").val();
+  /*if ((numDogs = "")) {
+    numDogs == 3;
+  }*/
+  fetch(`https://dog.ceo/api/breeds/image/random/${numDogs}`)
     .then((response) => response.json())
-    .then((responseJson) => console.log(responseJson));
+    .then((responseJson) => displayResults(responseJson));
+}
+
+function displayResults(responseJson) {
+  console.log(responseJson);
+  $(".results-img").replaceWith(
+    `<img src="${responseJson.message[0]}" class="results-img">`
+  );
+  $(".results").removeClass("hidden");
 }
 
 function watchForm() {

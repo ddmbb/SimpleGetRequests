@@ -2,19 +2,21 @@
 
 function getDogImage() {
   let numDogs = $("#dogs").val();
-  /*if ((numDogs = "")) {
-    numDogs == 3;
-  }*/
+  if (numDogs === "") {
+    numDogs = 3;
+  }
   fetch(`https://dog.ceo/api/breeds/image/random/${numDogs}`)
     .then((response) => response.json())
     .then((responseJson) => displayResults(responseJson));
 }
 
 function displayResults(responseJson) {
+  let acc = "";
+  for (let i = 0; i < responseJson.message.length; i++) {
+    acc += `<img src="${responseJson.message[i]}" class="results-img">`;
+  }
   console.log(responseJson);
-  $(".results-img").replaceWith(
-    `<img src="${responseJson.message[0]}" class="results-img">`
-  );
+  $(".results-img").replaceWith(acc);
   $(".results").removeClass("hidden");
 }
 

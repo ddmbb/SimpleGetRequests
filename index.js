@@ -16,13 +16,14 @@ function displayResults(responseJson) {
     acc += `<img src="${responseJson.message[i]}" class="results-img">`;
   }
   console.log(responseJson);
-  $(".results-img").replaceWith(acc);
+  $(".results-img").html(acc);
   $(".results").removeClass("hidden");
 }
 
 function watchForm() {
   $("form").submit((event) => {
     event.preventDefault();
+    $(".results-img").html("");
     getDogImage();
   });
 }
